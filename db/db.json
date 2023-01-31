@@ -2,13 +2,13 @@
   "contacts": [
     {
       "id": 1,
-      "nama": "Paijo",
-      "no": "086745455454"
+      "name": "Paijo",
+      "nohp": "086745455454"
     },
     {
       "id": 2,
-      "nama": "Tukijo",
-      "no": "086749499494"
+      "name": "Tukijo",
+      "nohp": "086749499494"
     }
   ]
 }
