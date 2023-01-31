@@ -9,7 +9,6 @@ const ListContact = () => {
 
   useEffect(() => {
     // panggil action getListContact
-    console.log("1. useEffect component did mount (di ListContact Component");
     dispatch(getListContact());
   }, [dispatch]);
 
@@ -20,7 +19,7 @@ const ListContact = () => {
         getListContactResult.map((contact) => (
           <p key={contact.id}>
             {" "}
-            {contact.nama} - {contact.no}
+            {contact.name} - {contact.nohp}
           </p>
         ))
       ) : getListContactLoading ? (
