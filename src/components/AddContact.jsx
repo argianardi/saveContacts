@@ -14,7 +14,6 @@ const AddContact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("1. masuk handle submit");
     dispatch(addContact({ name, nohp }));
   };
 

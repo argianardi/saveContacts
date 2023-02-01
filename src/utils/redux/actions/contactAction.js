@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_LIST_CONTACT = "GET_LIST_CONTACT";
 export const ADD_CONTACT = "ADD_CONTACT";
+export const DELETE_CONTACT = "DELETE_CONTACT";
 
 export const getListContact = () => {
   return (dispatch) => {
@@ -44,7 +45,6 @@ export const getListContact = () => {
 };
 
 export const addContact = (data) => {
-  console.log("2. masuk action");
   return (dispatch) => {
     // Loading
     dispatch({
@@ -61,7 +61,6 @@ export const addContact = (data) => {
       .post("http://localhost:2023/contacts", data)
       .then((response) => {
         // berhasil post api
-        console.log("3. Berhasil dapat data: ", response);
         dispatch({
           type: ADD_CONTACT,
           payload: {
@@ -73,9 +72,50 @@ export const addContact = (data) => {
       })
       .catch((error) => {
         // gagal post api
-        console.log("3. Gagal dapat data:", error.message);
         dispatch({
           type: ADD_CONTACT,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const deleteContact = (id) => {
+  return (dispatch) => {
+    // Loading
+    dispatch({
+      type: DELETE_CONTACT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // Delete API
+    axios
+      .delete(`http://localhost:2023/contacts/${id}`)
+      .then((response) => {
+        // berhasil delete api
+        console.log("3. Berhasil delete data: ", response);
+        dispatch({
+          type: DELETE_CONTACT,
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        // gagal delete api
+        console.log("3. Gagal delete data:", error.message);
+        dispatch({
+          type: DELETE_CONTACT,
           payload: {
             loading: false,
             data: false,
