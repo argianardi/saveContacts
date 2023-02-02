@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_LIST_CONTACT = "GET_LIST_CONTACT";
 export const ADD_CONTACT = "ADD_CONTACT";
 export const DELETE_CONTACT = "DELETE_CONTACT";
+export const DETAIL_CONTACT = "DETAIL_CONTACT";
+export const UPDATE_CONTACT = "UPDATE_CONTACT";
 
 export const getListContact = () => {
   return (dispatch) => {
@@ -116,6 +118,57 @@ export const deleteContact = (id) => {
         console.log("3. Gagal delete data:", error.message);
         dispatch({
           type: DELETE_CONTACT,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const detailContact = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: DETAIL_CONTACT,
+      payload: {
+        data: data,
+      },
+    });
+  };
+};
+
+export const updateContact = (data) => {
+  return (dispatch) => {
+    // Loading
+    dispatch({
+      type: UPDATE_CONTACT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // put API
+    axios
+      .put(`http://localhost:2023/contacts/${data.id}`, data)
+      .then((response) => {
+        // berhasil put api
+        dispatch({
+          type: UPDATE_CONTACT,
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((error) => {
+        // gagal put api
+        dispatch({
+          type: UPDATE_CONTACT,
           payload: {
             loading: false,
             data: false,
