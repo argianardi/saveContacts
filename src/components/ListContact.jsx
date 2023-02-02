@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteContact,
+  detailContact,
   getListContact,
 } from "../utils/redux/actions/contactAction";
 
@@ -35,6 +36,12 @@ const ListContact = () => {
             {contact.name} - {contact.nohp}
             <button onClick={() => dispatch(deleteContact(contact.id))}>
               Delete
+            </button>
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={() => dispatch(detailContact(contact))}
+            >
+              Edit
             </button>
           </p>
         ))
